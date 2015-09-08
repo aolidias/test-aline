@@ -1,16 +1,30 @@
 package br.com.aline.stream;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.util.CollectionUtils;
+
 public class StreamMain {
 	
+	
+
 	public static char firstChar(Stream input) {
-		char firstDiff = 0;
-		char last = 0;
+		Set<Character> listDiff = new HashSet<>();
+		List<Character> notRepeatCharaters = new ArrayList<>();
 		while(input.hasNext()){
-			last = input.getNext();
-			if(firstDiff != last){
-				firstDiff = last;
+			char next = input.getNext();
+			boolean add = listDiff.add(input.getNext());
+			if(!add){
+				notRepeatCharaters.add(next);
 			}
 		}
-		return firstDiff;
+		if(CollectionUtils.isEmpty(notRepeatCharaters)){
+			throw new RuntimeException();
+		}else{
+			return listDiff.iterator().next();
+		}
 	}
 }
