@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import br.com.aline.api.configuration.Application;
+import br.com.aline.configuration.Application;
 
 /**
  * Classe que contém os testes da cep-api.

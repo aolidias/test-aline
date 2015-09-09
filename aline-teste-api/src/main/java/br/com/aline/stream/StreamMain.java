@@ -12,7 +12,7 @@ import br.com.aline.api.exception.CharStreamException;
  */
 public class StreamMain {
 	
-	public static char firstChar(Stream input) {
+	public static char firstChar(Stream input) throws CharStreamException {
 		
 		List<Character> listDiff = new ArrayList<>();
 		String palavra = "";

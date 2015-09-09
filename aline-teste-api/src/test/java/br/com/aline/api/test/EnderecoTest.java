@@ -24,9 +24,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import br.com.aline.api.configuration.Application;
 import br.com.aline.api.model.Endereco;
 import br.com.aline.api.service.CepApiService;
+import br.com.aline.configuration.Application;
 
 import com.google.gson.Gson;
 
@@ -72,7 +72,22 @@ public class EnderecoTest {
 //				.andDo(MockMvcResultHandlers.print())
 //				.andExpect(jsonPath("id", notNullValue()));
 //	}
-
+	
+	
+	/**
+	 * Método que testa a busca de endereço by ID.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void buscarEnderecoByIdTest() throws Exception {
+		this.mvc.perform(
+				get("/api/v1/endereco/3").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(jsonPath("$.rua", is("Av. Principal")));
+	}
+	
+	
 	/**
 	 * Método que testa a listagem de endereços
 	 * 
@@ -146,18 +161,7 @@ public class EnderecoTest {
 	}
 	
 	
-	/**
-	 * Método que testa a busca de endereço by ID.
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void buscarEnderecoByIdTest() throws Exception {
-		this.mvc.perform(
-				get("/api/v1/endereco/1").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andDo(MockMvcResultHandlers.print())
-				.andExpect(jsonPath("$.rua", is("Rua Felicidade")));
-	}
+	
 	
 	/**
 	 * Método que testa a busca de endereço by ID que não existe.
@@ -171,6 +175,8 @@ public class EnderecoTest {
 				.andDo(MockMvcResultHandlers.print()).andExpect(status().isNotFound());
 	}
 	
+	
+	
 	/**
 	 * Método que testa remover endereço pelo ID.
 	 * 
@@ -179,11 +185,11 @@ public class EnderecoTest {
 	@Test
 	public void removerEnderecoByIdTest() throws Exception {
 		this.mvc.perform(
-				delete("/api/v1/endereco/1").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
+				delete("/api/v1/endereco/2").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
 				.andDo(MockMvcResultHandlers.print());
 		
 		this.mvc.perform(
-				get("/api/v1/endereco/1").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
+				get("/api/v1/endereco/2").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
 				.andDo(MockMvcResultHandlers.print()).andExpect(status().isNotFound());
 	}
 	

@@ -39,6 +39,10 @@ public class StreamMainTest{
 		StreamImpl testeQuatro = new StreamImpl("!!#%#&%@");
 		char testeQuatroChar = StreamMain.firstChar(testeQuatro);
 		assertEquals('&', testeQuatroChar);
+		
+		StreamImpl testeCinco = new StreamImpl("rr BB");
+		char testeCincoChar = StreamMain.firstChar(testeCinco);
+		assertEquals(' ', testeCincoChar);
 	}
 	
 
