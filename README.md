@@ -28,7 +28,10 @@ mvn clean package spring-boot:run
 ## Questão 1 - Estratégia ##
 
 A estratégia foi de utilizar o MVC e construir uma aplicação simples e fácil de entender.
-Na primeira questão a estratégia foi criar a entidade para o Cep, o repositório desta entidade para persistência dos dados na base de dados (com spring boot não precisei configurar a base pois só colocando a dependência ela já faz automaticamente). Depois criei o serviço que iria consultar o Cep via repositório e o RestController aonde contém o serviço Rest que recebe as requisições de consulta de Cep, aonde o parâmetro é uma String de Cep e faz a validação deste campo e caso seja valido faz a consulta de cep no service e retorna um json com os dados encontrados. 
+Na primeira questão a estratégia foi criar a entidade para o Cep, o repositório desta entidade para persistência dos dados na base de dados (com spring boot não precisei configurar a base pois só colocando a dependência ela já faz automaticamente).
+
+Depois criei o serviço que iria consultar o Cep via repositório e o RestController aonde contém o serviço Rest que recebe as requisições de consulta de Cep, aonde o parâmetro é uma String de Cep e faz a validação deste campo e caso seja valido faz a consulta de cep no service e retorna um json com os dados encontrados. 
+
 Foi criada a classe CepTest que contém os testes para garantir o funcionamento da aplicação e documentação da mesma.
 
 Outras considerações deste serviço:
@@ -39,8 +42,11 @@ Outras considerações deste serviço:
 
 A estratégia foi de utilizar o MVC e construir uma aplicação simples e fácil de entender.
 Foi criado um RestController com as operações de criar, atualizar, listar, remover e listar pelo id. Foi mapeado a entidade Endereço e criado o repositório para a persistência dos dados e o serviço que contém a lógica de comunicação entre o controller e a base. 
+
 Foi criada uma classe que consome a api da questão 1 utilizando o RestTemplate para ser utilizada na validação da operação de criar endereço.
+
 Foi criada a classe EnderecoTest para testar as ações de listar, atualizar, buscar por ID e remover para garantir o funcionamento e documentação.
+
 Foi criada a classe CriarEnderecoTest para testar a ação de criar um endereço na base para garantir o funcionamento e documentação.
 
 Outras considerações deste serviço:
@@ -56,10 +62,15 @@ A classe StreamImpl possui dois métodos:
  * hasNext() que utiliza o index e o lenght da String para saber se tem mais algum caracter para ler.
 
 Foi criado a classe StreamMain que contém a lógica para indentificar o primeiro caracter que não se repete.
+
 Na classe StreamMain ele recebe uma Stream vai percorrer com um laço while todos os seus caracteres, dentro do laço ele vai criar um String que contém a palavra inteira da Stream e uma lista de caracters.
+
 Após esse laço ele vai percorrer a lista de caracteres pra descobrir quantas vezes aquele caracter aparece na palavra. 
+
 O primeiro caracter que retorna que ocorre uma vez ele retorna no método.
+
 Caso não aja caracteres que não se repita ele lança uma exceção com uma mensagem amigável.
+
 Foi criada a classe StreamMainTest para garantir o funcionamento do método e documentar.
 
 
