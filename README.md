@@ -40,7 +40,8 @@ Outras considerações deste serviço:
 A estratégia foi de utilizar o MVC e construir uma aplicação simples e fácil de entender.
 Foi criado um RestController com as operações de criar, atualizar, listar, remover e listar pelo id. Foi mapeado a entidade Endereço e criado o repositório para a persistência dos dados e o serviço que contém a lógica de comunicação entre o controller e a base. 
 Foi criada uma classe que consome a api da questão 1 utilizando o RestTemplate para ser utilizada na validação da operação de criar endereço.
-Foi criada a classe EnderecoTest para testar o CRUD, garantir o funcionamento e documentação.
+Foi criada a classe EnderecoTest para testar as ações de listar, atualizar, buscar por ID e remover para garantir o funcionamento e documentação.
+Foi criada a classe CriarEnderecoTest para testar a ação de criar um endereço na base para garantir o funcionamento e documentação.
 
 Outras considerações deste serviço:
 * As validações das operações criar e atualizar são validadas com BeanValidation.
