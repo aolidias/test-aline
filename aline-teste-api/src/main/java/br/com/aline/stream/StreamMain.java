@@ -1,30 +1,32 @@
 package br.com.aline.stream;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import org.springframework.util.CollectionUtils;
+import br.com.aline.api.exception.CharStreamException;
 
+/**
+ * Classe que contém a lógica para retornar o primeiro char de uma Stream que não se repete.
+ * @author aline.dias
+ * 
+ */
 public class StreamMain {
 	
-	
-
 	public static char firstChar(Stream input) {
-		Set<Character> listDiff = new HashSet<>();
-		List<Character> notRepeatCharaters = new ArrayList<>();
+		
+		List<Character> listDiff = new ArrayList<>();
+		String palavra = "";
 		while(input.hasNext()){
 			char next = input.getNext();
-			boolean add = listDiff.add(input.getNext());
-			if(!add){
-				notRepeatCharaters.add(next);
+			listDiff.add(next);
+			palavra = palavra + next;
+		}
+		for(Character c : listDiff){
+			int quantidade = palavra.length() - palavra.replaceAll(String.valueOf(c), "").length();
+			if(quantidade == 1){
+				return c;
 			}
 		}
-		if(CollectionUtils.isEmpty(notRepeatCharaters)){
-			throw new RuntimeException();
-		}else{
-			return listDiff.iterator().next();
-		}
+		throw new CharStreamException("Todos os caracteres das palavras se repetem.");
 	}
 }
