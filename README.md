@@ -23,10 +23,10 @@ Para as questões 1, 2 e 3 criei um único projeto para facilitar os testes e a 
 
 Dados adicionais:
 
-* inserts iniciais estão no arquivo data.sql
-* configurações estão no arquivo application.properties
-Comando para rodar o projeto:
+* Inserts iniciais estão no arquivo data.sql
+* Configurações estão no arquivo application.properties
 
+Comando para rodar o projeto:
 mvn clean package spring-boot:run
 
 ## Questão 1 - Estratégia ##
