@@ -55,7 +55,7 @@ public class EnderecoController {
 	 * Método que lista todos os endereços cadastrados. 
 	 * @return lista de endereço da base.
 	 */
-	@RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody EnderecoList listarEnderecos() {
 		LOGGER.debug("nova solitação para listar os endereços.");
@@ -67,7 +67,7 @@ public class EnderecoController {
 	 * @param id
 	 * @return endereço da base.
 	 */
-	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody Endereco buscarEnderecoById(@PathVariable Long id) {
 		LOGGER.debug("nova solitação para listar o endereço pelo id.");
@@ -91,8 +91,7 @@ public class EnderecoController {
 	 * Método que remove o endereço da base pelo id.
 	 * @param id
 	 */
-	@RequestMapping(method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void removerEndereco(@PathVariable Long id) {
 		LOGGER.debug("nova solitação para remover um endereço.");
 		service.removerEndereco(id);

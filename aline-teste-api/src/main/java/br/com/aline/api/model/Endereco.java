@@ -25,11 +25,11 @@ public class Endereco {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@NotEmpty(message="campo rua obrigatório.")
+	@NotEmpty(groups={EnderecoUpdateValidator.class}, message="campo rua obrigatório.")
 	@Column(nullable = false)
 	private String rua;
 	
-	@NotNull(message="campo numero obrigatório.")
+	@NotNull(groups={EnderecoUpdateValidator.class}, message="campo numero obrigatório.")
 	@Column(nullable = false)
 	private Integer numero;
 	
@@ -37,15 +37,15 @@ public class Endereco {
 	
 	private String complemento;
 	
-	@NotEmpty(message="campo cidade obrigatório.")
+	@NotEmpty(groups={EnderecoUpdateValidator.class}, message="campo cidade obrigatório.")
 	@Column(nullable = false)
 	private String cidade;
 	
-	@NotEmpty(message="campo estado obrigatório.")
+	@NotEmpty(groups={EnderecoUpdateValidator.class}, message="campo estado obrigatório.")
 	@Column(nullable = false)
 	private String estado;
 	
-	@NotEmpty(message="campo cep obrigatório.")
+	@NotEmpty(groups={EnderecoUpdateValidator.class}, message="campo cep obrigatório.")
 	@Column(nullable = false)
 	private String cep;
 	

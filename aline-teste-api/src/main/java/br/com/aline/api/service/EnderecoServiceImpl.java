@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.aline.api.exception.CepNotFoundException;
+import br.com.aline.api.exception.EnderecoNotFoundException;
 import br.com.aline.api.model.Endereco;
 import br.com.aline.api.repository.EnderecoRepository;
 
@@ -66,7 +67,10 @@ public class EnderecoServiceImpl implements EnderecoService{
 	@Override
 	public Endereco buscarEnderecoById(Long id) {
 		LOGGER.debug("buscando endereço de acordo com id dado.");
-		return repo.findOne(id);
+		Endereco enderecoEncontrado = repo.findOne(id);
+		if(enderecoEncontrado == null)
+			throw new EnderecoNotFoundException("Endereço não encotrado.");
+		return enderecoEncontrado;
 	}
 	
 	/**
@@ -77,6 +81,9 @@ public class EnderecoServiceImpl implements EnderecoService{
 	@Override
 	public Endereco alterarEndereco(Endereco endereco) {
 		LOGGER.debug("alterando endereço de id: {}  na base.", endereco.getId());
+		Endereco enderecoEncontrado = repo.findOne(endereco.getId());
+		if(enderecoEncontrado == null)
+			throw new EnderecoNotFoundException("Endereço não encotrado.");
 		return repo.save(endereco);
 	}
 	

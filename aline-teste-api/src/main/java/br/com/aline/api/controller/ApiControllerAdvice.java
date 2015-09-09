@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.aline.api.exception.CepNotFoundException;
+import br.com.aline.api.exception.EnderecoNotFoundException;
 import br.com.aline.api.exception.InvalidCepException;
 import br.com.aline.api.model.ErrorInfo;
 
@@ -38,6 +39,12 @@ public class ApiControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ErrorInfo methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        return new ErrorInfo(ex.getLocalizedMessage());
+    }
+    @ResponseBody
+    @ExceptionHandler(EnderecoNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    ErrorInfo enderecoNotFoundException(EnderecoNotFoundException ex) {
         return new ErrorInfo(ex.getLocalizedMessage());
     }
 }

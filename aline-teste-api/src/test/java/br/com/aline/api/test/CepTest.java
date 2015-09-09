@@ -42,7 +42,7 @@ public class CepTest {
 	}
 	
 	/**
-	 * Testa a api para encontrar o cep com sucesso substituindo 7 zeros.
+	 * Método que testa a api para encontrar o cep com sucesso substituindo 7 zeros.
 	 * 
 	 * @throws Exception
 	 */
@@ -58,7 +58,7 @@ public class CepTest {
 	}
 	
 	/**
-	 * Testa a api para retornar o cep com sucesso.
+	 * Método que testa a api para retornar o cep com sucesso.
 	 * 
 	 * @throws Exception
 	 */
@@ -74,7 +74,7 @@ public class CepTest {
 	}
 	
 	/**
-	 * Testa api para retornar o cep com sucesso substituindo o zero uma vez.
+	 * Método que testa api para retornar o cep com sucesso substituindo o zero uma vez.
 	 * 
 	 * @throws Exception
 	 */

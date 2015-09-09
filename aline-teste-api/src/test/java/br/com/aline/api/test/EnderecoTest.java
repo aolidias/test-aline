@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -18,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -62,7 +64,6 @@ public class EnderecoTest {
 	 */
 //	@Test
 //	public void criarEnderecoTest() throws Exception {
-//		Gson gson = new Gson();
 //		Endereco e = new Endereco("teste", 23, "vila madalena", "teste","São Paulo", "SP", "03232000");
 //		String cepJson = gson.toJson(e);
 //		mvc.perform(
@@ -87,6 +88,10 @@ public class EnderecoTest {
 						jsonPath("enderecos", hasSize(greaterThanOrEqualTo(1))));
 	}
 	
+	/**
+	 * Método que testa a tentativa de alterar o endereço sem o id.
+	 * @throws Exception
+	 */
 	@Test
 	public void alterarEnderecoSemIdTest() throws Exception {
 		Endereco e = new Endereco("teste", 23, "vila madalena", "teste", "São Paulo", "SP", "1231313");
@@ -97,26 +102,52 @@ public class EnderecoTest {
 	}
 	
 	/**
-	 * Método que testa a criação de endereço via api.
-	 * 
+	 * Método que testa  tentativa de alterar o endereço inexistente.
 	 * @throws Exception
 	 */
-//	@Test
-//	public void criarEnderecoComCepInexistenteTest() throws Exception {
-//		Gson gson = new Gson();
-//		Endereco e = new Endereco("teste", 23, "vila madalena", "teste",
-//				"São Paulo", "SP", "1231312");
-//		String cepJson = gson.toJson(e);
-//		mvc.perform(
-//				post("/api/v1/endereco").content(cepJson)
-//						.contentType(MediaType.APPLICATION_JSON)
-//						.accept(MediaType.APPLICATION_JSON))
-//				.andExpect(status().isNotFound())
-//				.andDo(MockMvcResultHandlers.print());
-//	}
+	@Test
+	public void alterarEnderecoInexistenteTest() throws Exception {
+		Endereco e = new Endereco(20L, "teste", 23, "vila madalena", "teste", "São Paulo", "SP", "1231313");
+		String cepJson = gson.toJson(e);
+		this.mvc.perform(put("/api/v1/endereco").content(cepJson).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound())
+				.andDo(MockMvcResultHandlers.print());
+	}
+		
 	
 	/**
-	 * Método que testa a busca de endereço by ID
+	 * Método que testa  alteração do endereço com sucesso.
+	 * @throws Exception
+	 */
+	@Test
+	public void alterarEnderecoTest() throws Exception {
+		Endereco e = new Endereco(1L, "teste", 23, "vila madalena", "teste", "São Paulo", "SP", "1231313");
+		String cepJson = gson.toJson(e);
+		this.mvc.perform(put("/api/v1/endereco").content(cepJson).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
+				.andDo(MockMvcResultHandlers.print());
+		this.mvc.perform(
+				get("/api/v1/endereco/1").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(jsonPath("$.rua", is("teste")));
+	}
+	
+	/**
+	 * Método que testa a alteração do endereço sem dados obrigatórios.
+	 * @throws Exception
+	 */
+	@Test
+	public void alterarEnderecoSemDadosObrigatoriosTest() throws Exception {
+		Endereco e = new Endereco();
+		e.setId(1L);
+		String cepJson = gson.toJson(e);
+		this.mvc.perform(put("/api/v1/endereco").content(cepJson).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isBadRequest())
+				.andDo(MockMvcResultHandlers.print());
+	}
+	
+	
+	/**
+	 * Método que testa a busca de endereço by ID.
 	 * 
 	 * @throws Exception
 	 */
@@ -128,5 +159,32 @@ public class EnderecoTest {
 				.andExpect(jsonPath("$.rua", is("Rua Felicidade")));
 	}
 	
+	/**
+	 * Método que testa a busca de endereço by ID que não existe.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void buscarEnderecoInexistenteByIdTest() throws Exception {
+		this.mvc.perform(
+				get("/api/v1/endereco/20").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
+				.andDo(MockMvcResultHandlers.print()).andExpect(status().isNotFound());
+	}
+	
+	/**
+	 * Método que testa remover endereço pelo ID.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void removerEnderecoByIdTest() throws Exception {
+		this.mvc.perform(
+				delete("/api/v1/endereco/1").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
+				.andDo(MockMvcResultHandlers.print());
+		
+		this.mvc.perform(
+				get("/api/v1/endereco/1").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
+				.andDo(MockMvcResultHandlers.print()).andExpect(status().isNotFound());
+	}
 	
 }
