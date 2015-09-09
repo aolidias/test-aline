@@ -1,11 +1,11 @@
 package br.com.aline.api.service;
 
-import br.com.aline.api.model.Endereco;
+import br.com.aline.api.model.Cep;
 
 
 public interface CepApiService {
 	
-	Endereco consultarCep(String cep);
+	Cep consultarCep(String cep);
 
 	
 }

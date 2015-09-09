@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.aline.api.exception.CepNotFoundException;
 import br.com.aline.api.exception.EnderecoNotFoundException;
+import br.com.aline.api.model.Cep;
 import br.com.aline.api.model.Endereco;
 import br.com.aline.api.repository.EnderecoRepository;
 
@@ -40,8 +41,8 @@ public class EnderecoServiceImpl implements EnderecoService{
 	@Override
 	public Endereco criarEndereco(Endereco endereco) {
 		LOGGER.debug("buscando o cep na api de busca de cep.");
-		Endereco enderecoByCep = cepApiService.consultarCep(endereco.getCep());
-		if(enderecoByCep == null){
+		Cep cep = cepApiService.consultarCep(endereco.getCep());
+		if(cep == null){
 			LOGGER.debug("cep não encontrado.");
 			throw new CepNotFoundException("cep nao existe.");
 		}

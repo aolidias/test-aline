@@ -3,15 +3,18 @@ package br.com.aline.api.test;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,13 +22,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import br.com.aline.api.model.Cep;
 import br.com.aline.api.model.Endereco;
+import br.com.aline.api.repository.EnderecoRepository;
 import br.com.aline.api.service.CepApiService;
+import br.com.aline.api.service.EnderecoService;
 import br.com.aline.configuration.Application;
 
 import com.google.gson.Gson;
@@ -44,12 +49,22 @@ public class EnderecoTest {
 	@Autowired
 	WebApplicationContext context;
 	
+	@Mock
+	private EnderecoService enderecoService;
+	
+	@Mock
+	MockMvc mvc;
+	
+	@Mock
+	private EnderecoRepository enderecoRepository;
+	
+	
 	private Gson gson = new Gson();
 	
-	@Autowired
+	@Mock
 	private CepApiService cepApiService;
+	
 
-	private MockMvc mvc;
 
 	@Before
 	public void initTests() {
@@ -57,23 +72,6 @@ public class EnderecoTest {
 		mvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 
-	/**
-	 * Método que testa a criação de endereço via api.
-	 * 
-	 * @throws Exception
-	 */
-//	@Test
-//	public void criarEnderecoTest() throws Exception {
-//		Endereco e = new Endereco("teste", 23, "vila madalena", "teste","São Paulo", "SP", "03232000");
-//		String cepJson = gson.toJson(e);
-//		mvc.perform(
-//				post("/api/v1/endereco").content(cepJson).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
-//				.andExpect(status().isOk())
-//				.andDo(MockMvcResultHandlers.print())
-//				.andExpect(jsonPath("id", notNullValue()));
-//	}
-	
-	
 	/**
 	 * Método que testa a busca de endereço by ID.
 	 * 
@@ -161,8 +159,6 @@ public class EnderecoTest {
 	}
 	
 	
-	
-	
 	/**
 	 * Método que testa a busca de endereço by ID que não existe.
 	 * 
@@ -174,8 +170,6 @@ public class EnderecoTest {
 				get("/api/v1/endereco/20").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
 				.andDo(MockMvcResultHandlers.print()).andExpect(status().isNotFound());
 	}
-	
-	
 	
 	/**
 	 * Método que testa remover endereço pelo ID.

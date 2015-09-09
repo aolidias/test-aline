@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.aline.api.model.Endereco;
+import br.com.aline.api.model.Cep;
 
 /**
  * 
@@ -32,10 +32,10 @@ public class CepApiServiceImpl implements CepApiService {
 	 *
 	 */
 	@Override
-	public Endereco consultarCep(String cep) {	
+	public Cep consultarCep(String cep) {	
 		String url = apiUrl + "/" + cep;
 		try {
-			return restTemplate.getForObject(url , Endereco.class);
+			return restTemplate.getForObject(url , Cep.class);
 		} catch (Exception e) {
 			LOGGER.debug("Erro na busca de cep na api, erro : []", e.getMessage());
 		}
