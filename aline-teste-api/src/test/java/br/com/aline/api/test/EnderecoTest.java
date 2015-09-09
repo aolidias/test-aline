@@ -3,7 +3,6 @@ package br.com.aline.api.test;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -13,8 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,11 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import br.com.aline.api.model.Cep;
 import br.com.aline.api.model.Endereco;
-import br.com.aline.api.repository.EnderecoRepository;
-import br.com.aline.api.service.CepApiService;
-import br.com.aline.api.service.EnderecoService;
 import br.com.aline.configuration.Application;
 
 import com.google.gson.Gson;
@@ -49,22 +42,9 @@ public class EnderecoTest {
 	@Autowired
 	WebApplicationContext context;
 	
-	@Mock
-	private EnderecoService enderecoService;
-	
-	@Mock
 	MockMvc mvc;
 	
-	@Mock
-	private EnderecoRepository enderecoRepository;
-	
-	
 	private Gson gson = new Gson();
-	
-	@Mock
-	private CepApiService cepApiService;
-	
-
 
 	@Before
 	public void initTests() {
