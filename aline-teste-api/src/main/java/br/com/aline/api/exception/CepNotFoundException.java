@@ -1,7 +1,7 @@
 package br.com.aline.api.exception;
 
 /**
- * Exception para endereço não encontrado. 
+ * Exception para cep não encontrado. 
  * 
  * @author aline.dias
  *

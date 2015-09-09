@@ -21,7 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 import br.com.aline.api.configuration.Application;
 
 /**
- * Classe que contém os testes da cep-api
+ * Classe que contém os testes da cep-api.
  * 
  * @author aline.dias
  *

@@ -36,7 +36,7 @@ public class CepController {
 	private static String ZERO = "0";
 
 	/**
-	 * Metódo responsável pela busca do cep.
+	 * Método responsável pela busca do cep.
 	 * 
 	 * @param cep
 	 * @return cep
@@ -68,7 +68,7 @@ public class CepController {
 	}
 	
 	/**
-	 * Metódo que faz substituição do cep por zero de acordo com index.
+	 * Método que faz substituição do cep por zero de acordo com index.
 	 * 
 	 * @param cep
 	 * @param index

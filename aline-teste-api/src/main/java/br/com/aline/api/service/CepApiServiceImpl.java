@@ -12,7 +12,7 @@ import br.com.aline.api.model.Endereco;
 
 /**
  * 
- * Classe que contém a chamada para a api de consulta de cep
+ * Classe que contém a chamada para a api de consulta de cep.
  * @author aline.dias
  *
  */
@@ -27,6 +27,10 @@ public class CepApiServiceImpl implements CepApiService {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CepApiServiceImpl.class);
 	
+	/**
+	 * Método que consulta o cep na api do cep.
+	 *
+	 */
 	@Override
 	public Endereco consultarCep(String cep) {	
 		String url = apiUrl + "/" + cep;

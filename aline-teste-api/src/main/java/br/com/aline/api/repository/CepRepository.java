@@ -13,7 +13,7 @@ import br.com.aline.api.model.Cep;
 public interface CepRepository extends JpaRepository<Cep, Long>{
 	
 	/**
-	 * Metódo para buscar pelo cep 
+	 * Método para buscar pelo cep .
 	 * @param cep
 	 * @return endereco
 	 */

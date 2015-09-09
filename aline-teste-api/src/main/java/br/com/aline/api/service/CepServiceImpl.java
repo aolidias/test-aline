@@ -11,7 +11,7 @@ import br.com.aline.api.model.Cep;
 import br.com.aline.api.repository.CepRepository;
 
 /**
- * Classe que contém o serviço do cep
+ * Classe que contém o serviço do cep.
  * 
  * @author aline.dias
  *

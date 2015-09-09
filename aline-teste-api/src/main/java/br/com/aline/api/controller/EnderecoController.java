@@ -39,6 +39,11 @@ public class EnderecoController {
 	@Autowired 
 	private CepApiService cepApiService;
 	
+	/**
+	 * Método que cria um endereço novo na base de acordo com a request.
+	 * @param endereco
+	 * @return endereco salvo com id
+	 */
 	@RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody Endereco criarEndereco(@RequestBody @Valid Endereco endereco) {
@@ -46,6 +51,10 @@ public class EnderecoController {
 		return service.criarEndereco(endereco);
 	}
 	
+	/**
+	 * Método que lista todos os endereços cadastrados. 
+	 * @return lista de endereço da base.
+	 */
 	@RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody EnderecoList listarEnderecos() {
@@ -53,6 +62,11 @@ public class EnderecoController {
 		return new EnderecoList(service.listarEnderecos());
 	}
 	
+	/**
+	 * Método que busca endereço pelo id.
+	 * @param id
+	 * @return endereço da base.
+	 */
 	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody Endereco buscarEnderecoById(@PathVariable Long id) {
@@ -60,6 +74,11 @@ public class EnderecoController {
 		return service.buscarEnderecoById(id);
 	}
 	
+	/**
+	 * Método que altera endereço na base.
+	 * @param endereco
+	 * @return endereço alterado da base
+	 */
 	@RequestMapping(method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody Endereco alterarEndereco(@RequestBody @Validated(value={EnderecoUpdateValidator.class}) Endereco endereco) {
@@ -67,6 +86,11 @@ public class EnderecoController {
 		return service.alterarEndereco(endereco);
 	}
 	
+	
+	/**
+	 * Método que remove o endereço da base pelo id.
+	 * @param id
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseStatus(HttpStatus.OK)
 	public void removerEndereco(@PathVariable Long id) {

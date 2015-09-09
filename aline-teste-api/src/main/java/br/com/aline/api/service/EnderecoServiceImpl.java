@@ -14,7 +14,7 @@ import br.com.aline.api.model.Endereco;
 import br.com.aline.api.repository.EnderecoRepository;
 
 /**
- * Classe que contém o serviço do endereço
+ * Classe que contém o serviço do endereço.
  * 
  * @author aline.dias
  *
