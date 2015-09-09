@@ -21,6 +21,10 @@ Para as questões 1, 2 e 3 criei um único projeto para facilitar os testes e a 
 * Como servidor de aplicação utilizei o embutido no spring boot 
 * Projeto segue a arquitetura MVC
 
+Dados adicionais:
+
+* inserts iniciais estão no arquivo data.sql
+* configurações estão no arquivo application.properties
 Comando para rodar o projeto:
 
 mvn clean package spring-boot:run
