@@ -42,6 +42,20 @@ Outras considerações deste serviço:
 * As validações são feitas em uma classe específica.
 * A um handler exception para tratar as exceções e mostrar uma mensagem mais amigável ao usuário.
 
+url para acesso: /api/v1/cep/{cepBuscado}
+
+Ceps pré cadastrados no sistema:
+
+03232000
+03232121
+10000000
+90000000
+05089030
+09003223
+62874578
+67450034
+12312300
+
 ## Questão 2 - Estratégia ##
 
 A estratégia foi de utilizar o MVC e construir uma aplicação simples e fácil de entender.
@@ -57,6 +71,8 @@ Outras considerações deste serviço:
 * As validações das operações criar e atualizar são validadas com BeanValidation.
 * Utilizar um handlers exception para o tratamento de exceções.
 
+
+url para acesso: /api/v1/endereco
 ## Questão 3 - Estratégia ##
 
 A estratégia utilizada foi simplicidade e legibilidade. Foi criada a interface Stream e sua implementação StreamImpl. 
